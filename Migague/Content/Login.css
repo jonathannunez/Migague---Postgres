@@ -1,0 +1,22 @@
+﻿/*Botones Lenguage*/
+.lang-arg {
+    border: 1px solid #563d7c;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px 5px 25px;
+    background: url(../Imagenes/lang-arg.png) left 3px top 5px no-repeat #563d7c;
+}
+.lang-usa {
+    border: 1px solid #563d7c;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px 5px 25px;
+    background: url(../Imagenes/lang-usa.png) left 3px top 5px no-repeat #563d7c;
+}
+.lang-cor {
+    border: 1px solid #563d7c;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px 5px 25px;
+    background: url(../Imagenes/lang-cor.png) left 3px top 5px no-repeat #563d7c;
+}

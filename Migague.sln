@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaPresentacion", "Migague\CapaPresentacion.csproj", "{6284E157-E576-4940-8FCE-C8388E111394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaDatos", "CapaDatos\CapaDatos.csproj", "{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaEntidades", "CapaEntidades\CapaEntidades.csproj", "{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaLogicaNegocio", "CapaLogicaNegocio\CapaLogicaNegocio.csproj", "{8DDBB49E-863C-4531-9981-5A356E414307}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugOptimizedCryptography|Any CPU = DebugOptimizedCryptography|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseOptimizedCryptography|Any CPU = ReleaseOptimizedCryptography|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6284E157-E576-4940-8FCE-C8388E111394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{6284E157-E576-4940-8FCE-C8388E111394}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{84A2CEC6-52AF-41D7-A478-19BED6DF5CFE}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{B96BC265-B0A7-48E1-AD81-AD2A8CFF82D1}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDBB49E-863C-4531-9981-5A356E414307}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

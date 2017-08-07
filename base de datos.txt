@@ -1,0 +1,37 @@
+CREATE TABLE logueo.funcionalidades (
+	id_funcionalidad NUMERIC(2,0) NOT NULL IDENTITY(1,1),
+	nombre_grupo nvarchar(255),
+	DESCRIPCION NVARCHAR(255),
+	PRIMARY KEY (id_funcionalidad)
+);
+
+CREATE TABLE logueo.roles_funcionalidades (
+	id_roles_funcionalidades NUMERIC(10,0) NOT NULL IDENTITY(1,1),
+	id_rol NUMERIC(2,0) NOT NULL,
+	id_funcionalidad NUMERIC(2,0) NOT NULL,
+	PRIMARY KEY (id_roles_funcionalidades),
+	FOREIGN KEY (id_rol) REFERENCES logueo.ROLES (ID_ROL),
+	FOREIGN KEY (id_funcionalidad) REFERENCES logueo.funcionalidades (id_funcionalidad)
+);
+
+select * from logueo.roles;
+select * from logueo.funcionalidades;
+select * from logueo.usuario;
+GO
+create procedure [logueo].[spGetFuncionalidades](@rol numeric(2,0))
+as
+begin
+	select f.nombre_grupo 'GRUPO', f.DESCRIPCION ' ', r.nombre 'ROLNAME' from logueo.roles_funcionalidades rf, logueo.roles r, logueo.funcionalidades f
+    where rf.id_rol = @rol and
+	      rf.id_funcionalidad = f.id_funcionalidad
+end
+
+GO
+create procedure [logueo].[spGetListaUsuarios]
+as
+begin
+	select u.nombre 'NOMBRE', u.password 'PASSWORD' , r.nombre 'NOMBREROL' from logueo.usuario u, logueo.roles r
+	where u.id_rol = r.id_rol
+end
+
+exec logueo.spGetListaUsuarios;

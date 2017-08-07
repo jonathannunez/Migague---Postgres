@@ -1,0 +1,7 @@
+C:\Migague\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Migague\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Migague\CapaDatos\bin\Debug\CapaEntidades.dll
+C:\Migague\CapaDatos\bin\Debug\CapaEntidades.pdb
+C:\Migague\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
+C:\Migague\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Migague\CapaDatos\obj\Debug\CapaDatos.pdb
