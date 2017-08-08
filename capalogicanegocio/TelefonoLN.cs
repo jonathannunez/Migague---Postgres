@@ -68,11 +68,11 @@ namespace CapaLogicaNegocio
             }
         }
         */
-        public bool eliminarTelefono(int id, string schema)
+        public bool eliminarTelefono(int id, string schema, NpgsqlConnection conexion)
         {
             try
             {
-                return TelefonoDAO.getInstance().eliminarTelefono(id, schema);
+                return TelefonoDAO.getInstance().eliminarTelefono(id, schema, conexion);
             }
             catch (Exception e)
             {

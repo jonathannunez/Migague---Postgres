@@ -28,7 +28,14 @@
                         <asp:Panel ID="pnlOrders" runat="server" Style="display: none">
                             <asp:GridView ID="gvTelefonos" runat="server" AutoGenerateColumns="false" CssClass = "ChildGrid" Caption="TELEFONOS">
                                 <Columns>
-                                    <asp:BoundField ItemStyle-Width="150px" DataField="id" HeaderText="IdTelefono" />
+                                    <asp:TemplateField HeaderText="<%$ Resources:AdminClientes, gridClientesID%>" Visible="false">
+                                        <ItemTemplate>
+                                            <asp:TextBox runat="server" ID="txtIdTelefono" Text='<%# Eval("id")%>' Visible="false"/>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:TextBox runat="server" ID="txtEditIdTelefono" Text='<%# Eval("id")%>' Visible="false"/>
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:BoundField ItemStyle-Width="150px" DataField="telefono" HeaderText="Numero" />
                                     <asp:BoundField ItemStyle-Width="150px" DataField="descripcion" HeaderText="Descripcion" />
                                     <asp:BoundField ItemStyle-Width="150px" DataField="fecha" HeaderText="Fecha" />

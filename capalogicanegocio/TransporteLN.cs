@@ -104,10 +104,23 @@ namespace CapaLogicaNegocio
                 throw e;
             }
         }
-        
+
+        public bool eliminarTransporteCliente(int id_transporte, int id_cliente, string schema, NpgsqlConnection conexion)
+        {
+            try
+            {
+                return TransporteDAO.getInstance().eliminarTransporteCliente(id_transporte, id_cliente, schema, conexion);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         #endregion
 
-      
+
 
     }
 

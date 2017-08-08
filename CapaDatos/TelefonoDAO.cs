@@ -134,28 +134,25 @@ namespace CapaDatos
             return true;
         }
         */
-        public bool eliminarTelefono(int id, string schema)
+        public bool eliminarTelefono(int id, string schema, NpgsqlConnection conexion)
         {
             bool retorno = false;
-            NpgsqlConnection conexion = null;
             NpgsqlCommand cmd = null;
             try
             {
-                conexion = Conexion.getInstance().ConexionDB();
                 cmd = new NpgsqlCommand("logueo.speliminartelefonocliente", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("parm_id", id);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
-                conexion.Open();
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
+                return false;
                 throw e;
             }
             finally
             {
-                conexion.Close();
             }
             retorno = true;
             return retorno;

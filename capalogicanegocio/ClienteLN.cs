@@ -67,11 +67,11 @@ namespace CapaLogicaNegocio
             }
         }
 
-        public bool eliminarCliente(int id, string schema)
+        public bool eliminarCliente(Cliente cliente, string schema)
         {
             try
             {
-                return ClienteDAO.getInstance().eliminarCliente(id, schema);
+                return ClienteDAO.getInstance().eliminarCliente(cliente, schema);
             }
             catch (Exception e)
             {

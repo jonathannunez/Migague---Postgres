@@ -116,17 +116,15 @@ namespace Migague.Views.ABM
                 if (chk.Checked)
                 {
                     TextBox txtId = (TextBox)row.FindControl("txtId");
-                    TextBox txtNombre = (TextBox)row.FindControl("txtNombre");
-                    TextBox txtFecha = (TextBox)row.FindControl("txtFecha");
-                    int id = Convert.ToInt32(txtId.Text.Trim());
-                    string nombre = txtNombre.Text.Trim();
-                    DateTime fecha = Convert.ToDateTime(txtFecha.Text.Trim());
-                    bool eliminados = ClienteLN.getInstance().eliminarCliente(id,
+                    int id_cliente = Convert.ToInt32(txtId.Text.Trim());
+                    List<Cliente> listaFiltrada = listaClientes.Where(item => item.id == id_cliente).ToList();
+                    Cliente clienteSeleccionado = listaFiltrada[0];
+
+                    bool eliminados = ClienteLN.getInstance().eliminarCliente(clienteSeleccionado,
                         Session["schema"].ToString());
                     if (!eliminados)
                     {
-                        Response.Write(@"<script language='javascript'>alert('Error al eliminar la Cliente "
-                                            + nombre + " .');</script>");
+                        Response.Write(@"<script language='javascript'>alert('Error al eliminar la Cliente.');</script>");
                     }
                     else
                     {

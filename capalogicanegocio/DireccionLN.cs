@@ -69,11 +69,11 @@ namespace CapaLogicaNegocio
             }
         }
 
-        public bool eliminarDireccion(int id, string schema)
+        public bool eliminarDireccion(int id, string schema, NpgsqlConnection conexion)
         {
             try
             {
-                return DireccionDAO.getInstance().eliminarDireccion(id, schema);
+                return DireccionDAO.getInstance().eliminarDireccion(id, schema, conexion);
             }
             catch (Exception e)
             {

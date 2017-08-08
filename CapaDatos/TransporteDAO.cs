@@ -235,6 +235,32 @@ namespace CapaDatos
             retorno = true;
             return retorno;
         }
+
+        public bool eliminarTransporteCliente(int id_transporte, int id_cliente, string schema, NpgsqlConnection conexion)
+        {
+            bool retorno = false;
+            NpgsqlCommand cmd = null;
+            try
+            {
+                cmd = new NpgsqlCommand("logueo.speliminartransportecliente", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_idtransporte", id_transporte);
+                cmd.Parameters.AddWithValue("parm_idcliente", id_cliente);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw e;
+            }
+            finally
+            {
+            }
+            retorno = true;
+            return retorno;
+        }
+
         #endregion
 
         public bool validarObjetoExistente(List<Transporte> lista, string nombre)

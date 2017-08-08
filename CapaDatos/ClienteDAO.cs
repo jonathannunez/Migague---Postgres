@@ -233,29 +233,70 @@ namespace CapaDatos
             return true;
         }
 
-        public bool eliminarCliente(int id, string schema)
+        public bool eliminarCliente(Cliente cliente, string schema)
         {
             bool retorno = false;
             NpgsqlConnection conexion = null;
             NpgsqlCommand cmd = null;
+            NpgsqlTransaction tran = null;
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
                 cmd = new NpgsqlCommand("logueo.speliminarcliente", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_id", id);
+                cmd.Parameters.AddWithValue("parm_id", cliente.id);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
                 conexion.Open();
+                tran = conexion.BeginTransaction();
                 cmd.ExecuteNonQuery();
+
+                foreach (Telefono telefono in cliente.telefonos)
+                {
+                    bool retTel = false;
+                    retTel = TelefonoDAO.getInstance().eliminarTelefono(telefono.id, schema, conexion);
+                    if (!retTel)
+                    {
+                        retorno = false;
+                        return retorno;
+                    }
+                }
+
+                foreach (Transporte transporte in cliente.transportes)
+                {
+                    bool retTel = false;
+                    retTel = TransporteDAO.getInstance().eliminarTransporteCliente(transporte.id, cliente.id,schema, conexion);
+                    if (!retTel)
+                    {
+                        retorno = false;
+                        return retorno;
+                    }
+                }
+
+                foreach (Direccion direccion in cliente.direcciones)
+                {
+                    bool retTel = false;
+                    retTel = DireccionDAO.getInstance().eliminarDireccion(direccion.id, schema, conexion);
+                    if (!retTel)
+                    {
+                        retorno = false;
+                        return retorno;
+                    }
+                }
+
+
             }
             catch (Exception e)
             {
+                tran.Rollback();
                 throw e;
+
             }
             finally
             {
-                conexion.Close();
+                
             }
+            tran.Commit();
+            conexion.Close();
             retorno = true;
             return retorno;
         }
