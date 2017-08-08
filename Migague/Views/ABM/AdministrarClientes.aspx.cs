@@ -185,5 +185,12 @@ namespace Migague.Views.ABM
                 gvTransportes.DataBind();
             }
         }
+
+        protected void txbSearch_TextChanged(object sender, EventArgs e)
+        {
+            List<Cliente> listaFiltrada = listaClientes.Where(item => item.nombre.ToUpper().Trim().Contains(txbSearch.Text.ToUpper().Trim())).ToList();
+            gridClientes.DataSource = listaFiltrada;
+            gridClientes.DataBind();
+        }
     }
 }

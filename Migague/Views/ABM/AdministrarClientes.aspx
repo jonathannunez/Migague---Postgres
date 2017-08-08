@@ -14,6 +14,10 @@
             $(this).closest("tr").next().remove();
         });
     </script>
+
+    <asp:Label ID="lblSearch" runat="server" Text="Buscar"></asp:Label>
+    <asp:TextBox ID="txbSearch" runat="server" OnTextChanged="txbSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
+
     <div class="form-group" style="text-align: left">
         <asp:GridView ID="gridClientes" runat="server" AutoGenerateColumns="False" AllowPaging="true"
             AllowSorting="true" OnRowUpdating="gridClientes_RowUpdating" OnRowEditing="gridClientes_RowEditing"
