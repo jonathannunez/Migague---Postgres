@@ -23,6 +23,7 @@ namespace Migague.Views.Stock
 
         protected void BindData()
         {
+            int id_sucursal = Convert.ToInt32(Session["userSucursal"].ToString());
             DataTable listaStock = StockLN.getInstance().listaStock(Convert.ToInt32(Session["userSucursal"].ToString()),
                 Session["schema"].ToString());
             

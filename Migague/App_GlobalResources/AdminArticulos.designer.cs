@@ -196,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese stock.
+        /// </summary>
+        internal static string lblNuevoArticuloStock {
+            get {
+                return ResourceManager.GetString("lblNuevoArticuloStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Seleccione talle.
         /// </summary>
         internal static string lblNuevoArticuloTalle {
@@ -219,6 +228,15 @@ namespace Resources {
         internal static string phNuevoArticuloPreciomin {
             get {
                 return ResourceManager.GetString("phNuevoArticuloPreciomin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese cantidad de stock.
+        /// </summary>
+        internal static string phNuevoArticuloStock {
+            get {
+                return ResourceManager.GetString("phNuevoArticuloStock", resourceCulture);
             }
         }
     }

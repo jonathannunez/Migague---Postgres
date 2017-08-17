@@ -90,6 +90,7 @@ namespace Migague.Views.ABM
         {
             gridClientes.EditIndex = e.NewEditIndex;
             BindData();
+           
         }
 
         // Cancelar el modo edición

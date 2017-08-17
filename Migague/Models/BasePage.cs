@@ -14,6 +14,8 @@ namespace Migague
 {
     public class BasePage:Page
     {
+       public static int id_sucursal;
+
         protected override void InitializeCulture()
         {
             string language = Session["Lang"].ToString();

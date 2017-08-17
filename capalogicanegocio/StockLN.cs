@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CapaEntidades;
 using CapaDatos;
 using System.Data;
+using Npgsql;
 
 namespace CapaLogicaNegocio
 {
@@ -39,12 +40,12 @@ namespace CapaLogicaNegocio
                 throw e;
             }
         }
-        /*
-        public string nuevoBanco(string nombre, DateTime fecha, string schema)
+
+        public bool nuevoStock(Stockcs stock, string schema, NpgsqlConnection conexion)
         {
             try
             {
-                return AdminDAO.getInstance().nuevoBanco(nombre, fecha, schema);
+                return StockDAO.getInstance().nuevoStock(stock, schema, conexion);
             }
             catch (Exception e)
             {
@@ -52,11 +53,12 @@ namespace CapaLogicaNegocio
                 throw e;
             }
         }
-        public bool updateBanco(int id, string nombre, DateTime fecha, string schema)
+
+        public bool decrementarStock(Stockcs stock, Sucursal sucursal, string schema)
         {
             try
             {
-                return AdminDAO.getInstance().updateBanco(id, nombre, fecha, schema);
+                return StockDAO.getInstance().decrementarStock(stock, sucursal, schema);
             }
             catch (Exception e)
             {
@@ -64,11 +66,12 @@ namespace CapaLogicaNegocio
                 throw e;
             }
         }
-        public bool eliminarBanco(int id, string nombre, string schema)
+
+        public bool incrementarStock(Stockcs stock, Sucursal sucursal, string schema)
         {
             try
             {
-                return AdminDAO.getInstance().eliminarBanco(id, nombre, schema);
+                return StockDAO.getInstance().incrementarStock(stock, sucursal, schema);
             }
             catch (Exception e)
             {
@@ -76,10 +79,62 @@ namespace CapaLogicaNegocio
                 throw e;
             }
         }
-        */
+
+        public bool registrarStockPerdido(Stockcs stock, Sucursal sucursal, string descripcion, string schema)
+        {
+            try
+            {
+                return StockDAO.getInstance().registrarStockPerdido(stock, sucursal, descripcion, schema);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        public bool registrarStockFallado(Stockcs stock, Sucursal sucursal, string schema)
+        {
+            try
+            {
+                return StockDAO.getInstance().registrarStockFallado(stock, sucursal, schema);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        public bool cambioStock(Stockcs stockEntrada, Stockcs stockSalida, Sucursal sucursal, string schema)
+        {
+            try
+            {
+                return StockDAO.getInstance().cambioStock(stockEntrada, stockSalida, sucursal, schema);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        public bool transferenciaStock(Stockcs stock, Sucursal sucursalSalida, Sucursal sucursalEntrada, string schema)
+        {
+            try
+            {
+                return StockDAO.getInstance().transferenciaStock(stock, sucursalSalida, sucursalEntrada, schema);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         #endregion
 
-      
+
 
     }
 

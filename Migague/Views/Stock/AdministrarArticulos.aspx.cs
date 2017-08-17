@@ -100,7 +100,7 @@ namespace Migague.Views.ABM
         // Agregar nuevo objeto
         protected void BtnAddNew_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/ABM/AdminNuevoArticulo.aspx");
+            Response.Redirect("~/Views/Stock/AdminNuevoArticulo.aspx");
         }
 
         // Eliminar seleccionados

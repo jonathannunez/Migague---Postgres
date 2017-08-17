@@ -35,6 +35,7 @@ namespace Migague.Views.Login
                 Session["schema"] = usuario.empresa.schema;
                 Session["sucursales"] = usuario.sucursales;
                 Session["funcionalidades"] = usuario.rol.funcionalidades;
+                Session["userSucursal"] = Convert.ToInt32(usuario.sucursales[0].id.ToString());
                 Response.Redirect("~/Default.aspx");
                 //Response.Redirect("~/RenderMenu.aspx");
 

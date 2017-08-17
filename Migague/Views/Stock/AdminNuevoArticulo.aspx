@@ -17,5 +17,8 @@
     <asp:Label ID="lblPreciomin" runat="server" Text="<%$ Resources:AdminArticulos, lblNuevoArticuloPreciomin%>"></asp:Label>
     <asp:TextBox ID="txtPreciomin" runat="server" placeholder="<%$ Resources:AdminArticulos, phNuevoArticuloPreciomin%>"></asp:TextBox><br />  
 
+     <asp:Label ID="lblStock" runat="server" Text="<%$ Resources:AdminArticulos, lblNuevoArticuloStock%>"></asp:Label>
+    <asp:TextBox ID="txtStock" runat="server" placeholder="<%$ Resources:AdminArticulos, phNuevoArticuloStock%>"></asp:TextBox><br />  
+
     <asp:Button ID="BtnAdd" runat="server" Text="<%$ Resources:AdminArticulos, BtnAdd%>" OnClick="BtnAdd_Click"/>
 </asp:Content>

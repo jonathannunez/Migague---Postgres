@@ -27,7 +27,7 @@ namespace Migague.Views.ABM
         {
             cargarModelos();
             cargarTalles();
-            //cargarColores();
+            cargarColores();
         }
 
         // cargar modelos
@@ -65,17 +65,38 @@ namespace Migague.Views.ABM
         
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
-            int preciomay = Convert.ToInt32(txtPreciomay.Text.Trim());
-            int preciomin = Convert.ToInt32(txtPreciomin.Text.Trim());
-            int idmodelo = Convert.ToInt32(ddlModelo.SelectedItem.Value.ToString());
-            string modelo = ddlModelo.SelectedItem.Text.ToString();
-            int idtalle = Convert.ToInt32(ddlTalle.SelectedItem.Value.ToString());
-            string talle = ddlTalle.SelectedItem.Text.ToString();
-            int idcolor = Convert.ToInt32(ddlColor.SelectedItem.Value.ToString());
-            string color = ddlColor.SelectedItem.Text.ToString();
+            Modelo modelo = new Modelo();
+            modelo.nombre = ddlModelo.SelectedItem.Text.ToString();
+            modelo.id = Convert.ToInt32(ddlModelo.SelectedItem.Value.ToString());
+
+            Talle talle = new Talle();
+            talle.id = Convert.ToInt32(ddlTalle.SelectedItem.Value.ToString());
+            talle.nombre = ddlTalle.SelectedItem.Text.ToString();
+
+            Color color = new Color();
+            color.id = Convert.ToInt32(ddlColor.SelectedItem.Value.ToString());
+            color.nombre = ddlColor.SelectedItem.Text.ToString();
+
+            Articulo articulo = new Articulo();
+            articulo.precio_may = Convert.ToInt32(txtPreciomay.Text.Trim());
+            articulo.precio_min = Convert.ToInt32(txtPreciomin.Text.Trim());
+            articulo.modelo = modelo;
+            articulo.talle = talle;
+            articulo.color = color;
+            articulo.cod_barra = "";
+
+            Sucursal sucursal = new Sucursal();
+            sucursal.id = Convert.ToInt32(Session["userSucursal"].ToString());
+
+            Stockcs stock = new Stockcs();
+            stock.articulo = articulo;
+            stock.cantidad = Convert.ToInt32(txtStock.Text.Trim());
+            stock.sucursal = sucursal;
             
-            string retorno = ArticuloLN.getInstance().nuevoArticulo(idmodelo, modelo, idtalle, talle, idcolor, color, 
-                preciomay, preciomin, "", Session["schema"].ToString());
+            
+            string retorno = ArticuloLN.getInstance().nuevoArticulo(articulo, stock, Session["schema"].ToString());
+
+
             txtPreciomay.Text = "";
             txtPreciomin.Text = "";
             Response.Write(@"<script language='javascript'>alert('" + retorno + " .');</script>");

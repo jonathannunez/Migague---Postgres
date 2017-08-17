@@ -97,85 +97,333 @@ namespace CapaDatos
             return dt;
         } 
 
-        public bool checkStockPreVenta(int id_sucursal, int id_modelo, int id_color, int id_talle, int cantidad, 
-            string schema)
+        public bool checkStockDisponible(Stockcs stock, Sucursal sucursal, string schema)
         {
             bool retorno = false;
             NpgsqlConnection conexion = null;
             NpgsqlCommand cmd = null;
             NpgsqlTransaction tran = null;
-            NpgsqlDataReader dr = null;
 
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.checkStockPreVenta", conexion);
+                cmd = new NpgsqlCommand("logueo.spcheckstockdisponible", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_idsucursal", id_modelo);
-                cmd.Parameters.AddWithValue("parm_idmodelo", id_modelo);
-                cmd.Parameters.AddWithValue("parm_idcolor", id_color);
-                cmd.Parameters.AddWithValue("parm_idtalle", id_talle);
+                cmd.Parameters.AddWithValue("parm_idsucursal", sucursal.id);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
                 conexion.Open();
-                tran = conexion.BeginTransaction();
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    if (Convert.ToInt32(dr["CANTIDAD_NETA"].ToString()) >= cantidad)
-                    {
-                        retorno = true;
-                    }
-                }
-                dr.Close();
+                Object retornoSQL = cmd.ExecuteScalar();
+                retorno = Convert.ToBoolean(retornoSQL);
             }
             catch (Exception e)
             {
-                retorno = false;
                 throw (e);
             }
-            finally
-            {
-                tran.Commit();
-                conexion.Close();
-            }
+            tran.Commit();
+            conexion.Close();
             return retorno;
         }
 
-        public bool reservaStockPreVenta(int id_modelo, int id_color, int id_talle, int cantidad, string schema)
+        public bool nuevoStock(Stockcs stock, string schema, NpgsqlConnection conexion)
+        {
+            NpgsqlCommand cmd = null;
+            try
+            {
+                cmd = new NpgsqlCommand("logueo.spnuevostock", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
+                cmd.Parameters.AddWithValue("parm_fecha", stock.fecha);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_idsucursal", stock.sucursal.id);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool decrementarStock(Stockcs stock, Sucursal sucursal, string schema)
         {
             bool retorno = false;
-            //bool hayStock = checkStockPreVenta(id_modelo, id_color, id_talle, cantidad, schema);
-            bool hayStock = false;
+            bool hayStock = checkStockDisponible(stock, sucursal, schema);
             if (hayStock)
             {
                 // si hay stock disponible lo reservo
                 NpgsqlConnection conexion = null;
                 NpgsqlCommand cmd = null;
+                NpgsqlTransaction tran = null;
                 try
                 {
                     conexion = Conexion.getInstance().ConexionDB();
-                    cmd = new NpgsqlCommand("logueo..reservarStock", conexion);
+                    cmd = new NpgsqlCommand("logueo.spdecrementarstock", conexion);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("parm_idmodelo", id_modelo);
-                    cmd.Parameters.AddWithValue("parm_idcolor", id_color);
-                    cmd.Parameters.AddWithValue("parm_idtalle", id_talle);
+                    cmd.Parameters.AddWithValue("parm_sucursal", sucursal.id);
+                    cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                    cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
                     cmd.Parameters.AddWithValue("parm_schema", schema);
                     conexion.Open();
+                    tran = conexion.BeginTransaction();
                     cmd.ExecuteNonQuery();
                     retorno = true;
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    tran.Rollback();
+                    retorno = false;
                 }
-                finally
-                {
-                    conexion.Close();
-                }
+                tran.Commit();
+                conexion.Close();
+            }
+            else
+            {
+                retorno = hayStock;
             }
             return retorno;
         }
-        #endregion
 
+        public bool decrementarStock(Stockcs stock, Sucursal sucursal, string schema, NpgsqlConnection conexion)
+        {
+            bool retorno = false;
+            bool hayStock = checkStockDisponible(stock, sucursal, schema);
+            if (hayStock)
+            {
+                // si hay stock disponible lo reservo
+                NpgsqlCommand cmd = null;
+                try
+                {
+                    cmd = new NpgsqlCommand("logueo.spdecrementarstock", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("parm_sucursal", sucursal.id);
+                    cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                    cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
+                    cmd.Parameters.AddWithValue("parm_schema", schema);
+                    cmd.ExecuteNonQuery();
+                    retorno = true;
+                }
+                catch (Exception e)
+                {
+                    retorno = false;
+                }
+            }
+            else
+            {
+                retorno = hayStock;
+            }
+            return retorno;
+        }
+
+        public bool incrementarStock(Stockcs stock, Sucursal sucursal, string schema)
+        {
+            bool retorno = false;
+            NpgsqlConnection conexion = null;
+            NpgsqlCommand cmd = null;
+            NpgsqlTransaction tran = null;
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                cmd = new NpgsqlCommand("logueo.spincrementarstock", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_sucursal", sucursal.id);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                cmd.ExecuteNonQuery();
+                retorno = true;
+            }
+            catch (Exception e)
+            {
+                tran.Rollback();
+                retorno = false;
+            }
+            tran.Commit();
+            conexion.Close();
+            return retorno;
+        }
+
+        public bool incrementarStock(Stockcs stock, Sucursal sucursal, string schema, NpgsqlConnection conexion)
+        {
+            bool retorno = false;
+            NpgsqlCommand cmd = null;
+            try
+            {
+                cmd = new NpgsqlCommand("logueo.spincrementarstock", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_sucursal", sucursal.id);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                cmd.ExecuteNonQuery();
+                retorno = true;
+            }
+            catch (Exception e)
+            {
+                retorno = false;
+            }
+            return retorno;
+        }
+
+        public bool registrarStockPerdido(Stockcs stock, Sucursal sucursal, string descripcion, string schema)
+        {
+            bool retorno = false;
+            NpgsqlConnection conexion = null;
+            NpgsqlCommand cmd = null;
+            NpgsqlTransaction tran = null;
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                cmd = new NpgsqlCommand("logueo.spregistrarstockperdido", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_sucursal", sucursal.id);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                bool decremento = decrementarStock(stock, sucursal, schema, conexion);
+                if (decremento)
+                {
+                    cmd.ExecuteNonQuery();
+                    retorno = true;
+                }
+                else
+                {
+                    tran.Rollback();
+                }
+            }
+            catch (Exception)
+            {
+                tran.Rollback();
+                conexion.Close();
+                return retorno;
+            }
+            tran.Commit();
+            conexion.Close();
+            return retorno;
+        }
+
+        public bool registrarStockFallado(Stockcs stock, Sucursal sucursal, string schema)
+        {
+            bool retorno = false;
+            NpgsqlConnection conexion = null;
+            NpgsqlCommand cmd = null;
+            NpgsqlTransaction tran = null;
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                cmd = new NpgsqlCommand("logueo.spregistrarperdido", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_sucursal", sucursal.id);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                bool decremento = decrementarStock(stock, sucursal, schema, conexion);
+                if (decremento)
+                {
+                    cmd.ExecuteNonQuery();
+                    retorno = true;
+                }
+                else
+                {
+                    tran.Rollback();
+                }
+            }
+            catch (Exception)
+            {
+                tran.Rollback();
+                conexion.Close();
+                return retorno;
+            }
+            tran.Commit();
+            conexion.Close();
+            return retorno;
+        }
+
+        public bool cambioStock(Stockcs stockEntrada, Stockcs stockSalida, Sucursal sucursal, string schema)
+        {
+            bool retorno = false;
+            NpgsqlConnection conexion = null;
+            NpgsqlTransaction tran = null;
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                bool incremento = incrementarStock(stockEntrada, sucursal, schema, conexion);
+                if (incremento)
+                {
+                    bool decremento = decrementarStock(stockSalida, sucursal, schema, conexion);
+                    if (decremento)
+                    {
+                        retorno = true;
+                    }
+                    else
+                    {
+                        tran.Rollback();
+                    }
+                }
+                else
+                {
+                    tran.Rollback();
+                }
+            }
+            catch (Exception)
+            {
+                tran.Rollback();
+                conexion.Close();
+                return retorno;
+            }
+            tran.Commit();
+            conexion.Close();
+            return retorno;
+        }
+
+        public bool transferenciaStock(Stockcs stock, Sucursal sucursalSalida, Sucursal sucursalEntrada, string schema)
+        {
+            bool retorno = false;
+            NpgsqlConnection conexion = null;
+            NpgsqlTransaction tran = null;
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                bool decremento = decrementarStock(stock, sucursalSalida, schema, conexion);
+                if (decremento)
+                {
+                    bool incremento = incrementarStock(stock, sucursalEntrada, schema, conexion);
+                    if (incremento)
+                    {
+                        retorno = true;
+                    }
+                    else
+                    {
+                        tran.Rollback();
+                    }
+                }
+                else
+                {
+                    tran.Rollback();
+                }
+            }
+            catch (Exception)
+            {
+                tran.Rollback();
+                conexion.Close();
+                return retorno;
+            }
+            tran.Commit();
+            conexion.Close();
+            return retorno;
+        }
+
+
+        #endregion
     }
 }

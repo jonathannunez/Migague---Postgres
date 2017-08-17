@@ -127,12 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Imagenes\plus.png" />
-    <Content Include="Views\ABM\AdministrarArticulos.aspx" />
+    <Content Include="Views\Stock\AdministrarArticulos.aspx" />
     <Content Include="Views\ABM\AdministrarClientes.aspx" />
     <Content Include="Views\ABM\AdminNuevoCliente.aspx" />
     <Content Include="Views\ABM\AdminUsuarioSucursal.aspx" />
     <Content Include="Views\ABM\AdministrarSucursales.aspx" />
-    <Content Include="Views\ABM\AdministrarModelos.aspx" />
+    <Content Include="Views\Stock\AdministrarModelos.aspx" />
     <Content Include="Views\ABM\AdministrarTransportes.aspx" />
     <Content Include="Views\ABM\AdministrarTiposGastos.aspx" />
     <Content Include="Views\ABM\AdministrarCategoriasPrecios.aspx" />
@@ -146,8 +146,8 @@
     <Content Include="Views\ABM\AdministrarRoles.aspx" />
     <Content Include="Views\ABM\AdministrarUsuarios.aspx" />
     <Content Include="Views\ABM\AdminNuevaSucursal.aspx" />
-    <Content Include="Views\ABM\AdminNuevoArticulo.aspx" />
-    <Content Include="Views\ABM\AdminNuevoModelo.aspx" />
+    <Content Include="Views\Stock\AdminNuevoArticulo.aspx" />
+    <Content Include="Views\Stock\AdminNuevoModelo.aspx" />
     <Content Include="Views\ABM\AdminNuevoTransporte.aspx" />
     <Content Include="Views\ABM\AdminNuevoTipoGasto.aspx" />
     <Content Include="Views\ABM\AdminNuevaLocalidad.aspx" />
@@ -369,11 +369,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Views\ABM\AdministrarArticulos.aspx.cs">
+    <Compile Include="Views\Stock\AdministrarArticulos.aspx.cs">
       <DependentUpon>AdministrarArticulos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ABM\AdministrarArticulos.aspx.designer.cs">
+    <Compile Include="Views\Stock\AdministrarArticulos.aspx.designer.cs">
       <DependentUpon>AdministrarArticulos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ABM\AdministrarClientes.aspx.cs">
@@ -404,11 +404,11 @@
     <Compile Include="Views\ABM\AdministrarSucursales.aspx.designer.cs">
       <DependentUpon>AdministrarSucursales.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ABM\AdministrarModelos.aspx.cs">
+    <Compile Include="Views\Stock\AdministrarModelos.aspx.cs">
       <DependentUpon>AdministrarModelos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ABM\AdministrarModelos.aspx.designer.cs">
+    <Compile Include="Views\Stock\AdministrarModelos.aspx.designer.cs">
       <DependentUpon>AdministrarModelos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ABM\AdministrarTransportes.aspx.cs">
@@ -502,18 +502,18 @@
     <Compile Include="Views\ABM\AdminNuevaSucursal.aspx.designer.cs">
       <DependentUpon>AdminNuevaSucursal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ABM\AdminNuevoArticulo.aspx.cs">
+    <Compile Include="Views\Stock\AdminNuevoArticulo.aspx.cs">
       <DependentUpon>AdminNuevoArticulo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ABM\AdminNuevoArticulo.aspx.designer.cs">
+    <Compile Include="Views\Stock\AdminNuevoArticulo.aspx.designer.cs">
       <DependentUpon>AdminNuevoArticulo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ABM\AdminNuevoModelo.aspx.cs">
+    <Compile Include="Views\Stock\AdminNuevoModelo.aspx.cs">
       <DependentUpon>AdminNuevoModelo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ABM\AdminNuevoModelo.aspx.designer.cs">
+    <Compile Include="Views\Stock\AdminNuevoModelo.aspx.designer.cs">
       <DependentUpon>AdminNuevoModelo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ABM\AdminNuevoTransporte.aspx.cs">

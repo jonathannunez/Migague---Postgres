@@ -39,13 +39,11 @@ namespace CapaLogicaNegocio
             }
         }
         
-        public string nuevoArticulo(int idmodelo, string modelo, int idtalle, string talle, int idcolor, string color, int preciomay,
-             int preciomin, string codbarra, string schema)
+        public string nuevoArticulo(Articulo articulo, Stockcs stock, string schema)
         {
             try
             {
-                return ArticuloDAO.getInstance().nuevoArticulo(idmodelo, modelo, idtalle, talle, idcolor, color,
-                    preciomay, preciomin, codbarra, schema);
+                return ArticuloDAO.getInstance().nuevoArticulo(articulo, stock, schema);
             }
             catch (Exception e)
             {

@@ -34,8 +34,10 @@ namespace Migague
                     ddlSucursales.Items.Add(newItem);
                 }
             }
+            
             int idsucursal = Convert.ToInt32(ddlSucursales.SelectedItem.Value.ToString());
             Session["userSucursal"] = idsucursal;
+
             //Seteo nombre de usuario
             lb_userName.Text = rm.GetString("LblBienvenido") + " " + Session["userName"].ToString();  
         }

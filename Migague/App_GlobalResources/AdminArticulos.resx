@@ -162,6 +162,9 @@
   <data name="lblNuevoArticuloPreciomin" xml:space="preserve">
     <value>Ingrese precio minorista</value>
   </data>
+  <data name="lblNuevoArticuloStock" xml:space="preserve">
+    <value>Ingrese stock</value>
+  </data>
   <data name="lblNuevoArticuloTalle" xml:space="preserve">
     <value>Seleccione talle</value>
   </data>
@@ -170,5 +173,8 @@
   </data>
   <data name="phNuevoArticuloPreciomin" xml:space="preserve">
     <value>Ingrese el precio minorista</value>
+  </data>
+  <data name="phNuevoArticuloStock" xml:space="preserve">
+    <value>Ingrese cantidad de stock</value>
   </data>
 </root>

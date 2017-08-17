@@ -104,12 +104,11 @@ namespace CapaDatos
             return listaArticulos;
         }
         
-        public string nuevoArticulo(int idmodelo, string modelo, int idtalle, string talle,  int idcolor,  string color, int preciomay,
-             int preciomin, string codbarra, string schema)
+        public string nuevoArticulo(Articulo articulo , Stockcs stock, string schema)
         {
             string retorno = null;
             List<Articulo> listArticulos = listaArticulos(schema);
-            bool existe = validarObjetoExistente(listArticulos, modelo, color, talle);
+            bool existe = validarObjetoExistente(listArticulos, articulo.modelo.nombre, articulo.color.nombre, articulo.talle.nombre);
             if (existe)
             {
                 retorno = "El articulo ya existe";
@@ -117,29 +116,40 @@ namespace CapaDatos
             }
             NpgsqlConnection conexion = null;
             NpgsqlCommand cmd = null;
+            NpgsqlTransaction tran = null;
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
                 cmd = new NpgsqlCommand("logueo.spnuevoarticulo", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_idmodelo", idmodelo);
-                cmd.Parameters.AddWithValue("parm_idtalle", idtalle);
-                cmd.Parameters.AddWithValue("parm_idcolor", idcolor);
-                cmd.Parameters.AddWithValue("parm_preciomay", preciomay);
-                cmd.Parameters.AddWithValue("parm_preciomin", preciomin);
-                cmd.Parameters.AddWithValue("parm_codbarra", codbarra);
+                cmd.Parameters.AddWithValue("parm_idmodelo", articulo.modelo.id);
+                cmd.Parameters.AddWithValue("parm_idtalle", articulo.talle.id);
+                cmd.Parameters.AddWithValue("parm_idcolor", articulo.color.id);
+                cmd.Parameters.AddWithValue("parm_preciomay", articulo.precio_may);
+                cmd.Parameters.AddWithValue("parm_preciomin", articulo.precio_min);
+                cmd.Parameters.AddWithValue("parm_codbarra", articulo.cod_barra);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
                 conexion.Open();
-                cmd.ExecuteNonQuery();
+                tran = conexion.BeginTransaction();
+                Object id_articulo = cmd.ExecuteScalar();
+                articulo.id = Convert.ToInt32(id_articulo);
+
+                if (!StockDAO.getInstance().nuevoStock(stock, schema, conexion))
+                {
+                    tran.Rollback();
+                    return "Error al crear stock";
+                }
             }
             catch (Exception e)
             {
-                throw e;
+                tran.Rollback();
             }
             finally
             {
-                conexion.Close();
+                
             }
+            tran.Commit();
+            conexion.Close();
             retorno = "Nuevo articulo añadido correctamente";
             return retorno;
         }
