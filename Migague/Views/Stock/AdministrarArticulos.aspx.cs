@@ -154,8 +154,7 @@ namespace Migague.Views.ABM
                 ddlTalles.DataBind();
                 ddlTalles.Items.FindByText((e.Row.FindControl("lblTalle") as Label).Text).Selected = true;
                 #endregion
-
-                
+          
                 #region "cargar lista colores"
                 DropDownList ddlColores = (DropDownList)e.Row.FindControl("ddlColores");
                 List<Color> listaColores = ColorLN.getInstance().listaColores(Session["schema"].ToString());
@@ -167,7 +166,6 @@ namespace Migague.Views.ABM
                 ddlColores.DataBind();
                 ddlColores.Items.FindByText((e.Row.FindControl("lblColor") as Label).Text).Selected = true;
                 #endregion
-    
 
             }
         }

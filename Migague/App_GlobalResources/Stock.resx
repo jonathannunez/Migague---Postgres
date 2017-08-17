@@ -126,6 +126,21 @@
   <data name="BtnNuevo" xml:space="preserve">
     <value>Nuevo stock</value>
   </data>
+  <data name="gridArticulosSalidaCantidad" xml:space="preserve">
+    <value>Cantidad stock</value>
+  </data>
+  <data name="gridArticulosSalidaColor" xml:space="preserve">
+    <value>Color articulo</value>
+  </data>
+  <data name="gridArticulosSalidaID" xml:space="preserve">
+    <value>ID Stock</value>
+  </data>
+  <data name="gridArticulosSalidaNombre" xml:space="preserve">
+    <value>Nombre articulo</value>
+  </data>
+  <data name="gridArticulosSalidaTalle" xml:space="preserve">
+    <value>Talle articulo</value>
+  </data>
   <data name="gridStockActivo" xml:space="preserve">
     <value>Activo</value>
   </data>
@@ -152,6 +167,9 @@
   </data>
   <data name="lblNuevoStockCantidad" xml:space="preserve">
     <value>Ingrese cantidad</value>
+  </data>
+  <data name="lblSucursalSalida" xml:space="preserve">
+    <value>Seleccione sucursal salida</value>
   </data>
   <data name="phNuevoStockCantidad" xml:space="preserve">
     <value>Ingrese cantidad</value>

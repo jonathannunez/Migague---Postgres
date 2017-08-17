@@ -146,6 +146,7 @@
     <Content Include="Views\ABM\AdministrarRoles.aspx" />
     <Content Include="Views\ABM\AdministrarUsuarios.aspx" />
     <Content Include="Views\ABM\AdminNuevaSucursal.aspx" />
+    <Content Include="Views\Stock\TransferirStock.aspx" />
     <Content Include="Views\Stock\AdminNuevoArticulo.aspx" />
     <Content Include="Views\Stock\AdminNuevoModelo.aspx" />
     <Content Include="Views\ABM\AdminNuevoTransporte.aspx" />
@@ -501,6 +502,13 @@
     </Compile>
     <Compile Include="Views\ABM\AdminNuevaSucursal.aspx.designer.cs">
       <DependentUpon>AdminNuevaSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stock\TransferirStock.aspx.cs">
+      <DependentUpon>TransferirStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Stock\TransferirStock.aspx.designer.cs">
+      <DependentUpon>TransferirStock.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Stock\AdminNuevoArticulo.aspx.cs">
       <DependentUpon>AdminNuevoArticulo.aspx</DependentUpon>

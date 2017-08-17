@@ -189,4 +189,7 @@
   <data name="submenuAdminUsers" xml:space="preserve">
     <value>ABM Usuarios</value>
   </data>
+  <data name="transferenciaStock" xml:space="preserve">
+    <value>Transferir Stock</value>
+  </data>
 </root>

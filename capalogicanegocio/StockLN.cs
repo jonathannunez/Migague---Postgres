@@ -41,6 +41,19 @@ namespace CapaLogicaNegocio
             }
         }
 
+        public List<Stockcs> listaStock2(int id_sucursal, string schema)
+        {
+            try
+            {
+                return StockDAO.getInstance().listaStock2(id_sucursal, schema);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         public bool nuevoStock(Stockcs stock, string schema, NpgsqlConnection conexion)
         {
             try

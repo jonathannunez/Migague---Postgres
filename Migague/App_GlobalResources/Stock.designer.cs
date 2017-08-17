@@ -88,6 +88,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cantidad stock.
+        /// </summary>
+        internal static string gridArticulosSalidaCantidad {
+            get {
+                return ResourceManager.GetString("gridArticulosSalidaCantidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Color articulo.
+        /// </summary>
+        internal static string gridArticulosSalidaColor {
+            get {
+                return ResourceManager.GetString("gridArticulosSalidaColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ID Stock.
+        /// </summary>
+        internal static string gridArticulosSalidaID {
+            get {
+                return ResourceManager.GetString("gridArticulosSalidaID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre articulo.
+        /// </summary>
+        internal static string gridArticulosSalidaNombre {
+            get {
+                return ResourceManager.GetString("gridArticulosSalidaNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Talle articulo.
+        /// </summary>
+        internal static string gridArticulosSalidaTalle {
+            get {
+                return ResourceManager.GetString("gridArticulosSalidaTalle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Activo.
         /// </summary>
         internal static string gridStockActivo {
@@ -165,6 +210,15 @@ namespace Resources {
         internal static string lblNuevoStockCantidad {
             get {
                 return ResourceManager.GetString("lblNuevoStockCantidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccione sucursal salida.
+        /// </summary>
+        internal static string lblSucursalSalida {
+            get {
+                return ResourceManager.GetString("lblSucursalSalida", resourceCulture);
             }
         }
         

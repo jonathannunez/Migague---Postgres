@@ -275,5 +275,14 @@ namespace Resources {
                 return ResourceManager.GetString("submenuAdminUsers", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Transferir Stock.
+        /// </summary>
+        internal static string transferenciaStock {
+            get {
+                return ResourceManager.GetString("transferenciaStock", resourceCulture);
+            }
+        }
     }
 }

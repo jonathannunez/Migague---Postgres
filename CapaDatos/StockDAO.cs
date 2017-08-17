@@ -97,6 +97,66 @@ namespace CapaDatos
             return dt;
         } 
 
+        public List<Stockcs> listaStock2(int id_sucursal, string schema)
+        {
+            NpgsqlConnection conexion = null;
+            NpgsqlCommand cmd = null;
+            List<Stockcs> listaStock = new List<Stockcs>();
+            NpgsqlTransaction tran = null;
+            NpgsqlDataReader dr = null;
+
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                cmd = new NpgsqlCommand("logueo.spgetstock2", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_idsucursal", id_sucursal);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Stockcs stock = new Stockcs();
+                    stock.id = Convert.ToInt32(dr["ID"].ToString());
+                    stock.cantidad_neta = Convert.ToInt32(dr["CANTIDAD_NETA"].ToString());
+                    stock.in_out = dr["IN_OUT"].ToString();
+                    stock.cantidad = Convert.ToInt32(dr["CANTIDAD"].ToString());
+                    stock.fecha = Convert.ToDateTime(dr["FECHA"].ToString());
+                    stock.es_activo = Convert.ToBoolean(dr["ESACTIVO"].ToString());
+
+                    Modelo modelo = new Modelo();
+                    modelo.id = Convert.ToInt32(dr["IDMODELO"].ToString());
+                    modelo.nombre = dr["ARTICULO"].ToString();
+
+                    Color color = new Color();
+                    color.id = Convert.ToInt32(dr["IDCOLOR"].ToString());
+                    color.nombre = dr["COLOR"].ToString();
+
+                    Talle talle = new Talle();
+                    talle.id = Convert.ToInt32(dr["IDTALLE"].ToString());
+                    talle.nombre = dr["TALLE"].ToString();
+
+                    Articulo articulo = new Articulo();
+                    articulo.modelo = modelo;
+                    articulo.color = color;
+                    articulo.talle = talle;
+
+                    stock.articulo = articulo;
+                    listaStock.Add(stock);
+                }
+                dr.Close();
+            }
+            catch (Exception)
+            {
+                tran.Rollback();
+                listaStock = null;
+            }
+            tran.Commit();
+            conexion.Close();
+            return listaStock;
+        }
+
         public bool checkStockDisponible(Stockcs stock, Sucursal sucursal, string schema)
         {
             bool retorno = false;
