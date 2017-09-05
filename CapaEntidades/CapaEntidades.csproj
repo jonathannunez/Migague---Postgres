@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caja_Cierre.cs" />
+    <Compile Include="Caja_Movimientos.cs" />
     <Compile Include="CategoriaPrecios.cs" />
     <Compile Include="CategoriaTributaria.cs" />
     <Compile Include="Cliente.cs" />

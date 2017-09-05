@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriaPreciosDAO.cs" />
+    <Compile Include="CajaDAO.cs" />
     <Compile Include="ClienteDAO.cs" />
     <Compile Include="DireccionDAO.cs" />
     <Compile Include="TelefonoDAO.cs" />

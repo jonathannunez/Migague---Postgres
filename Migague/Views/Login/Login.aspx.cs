@@ -30,6 +30,7 @@ namespace Migague.Views.Login
             if (usuario != null)
             {
                 //SET SESSION USER
+                Session["userId"] = usuario.id;
                 Session["userName"] = usuario.nombre;
                 Session["userRol"] = usuario.rol.id;
                 Session["schema"] = usuario.empresa.schema;

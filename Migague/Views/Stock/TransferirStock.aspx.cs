@@ -48,5 +48,15 @@ namespace Migague.Views.ABM
             gridArticulosSalida.DataBind();
         }
 
+        protected void ddlSucursalSalida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            reloadData(Convert.ToInt32(ddlSucursalSalida.SelectedItem.Value));
+        }
+
+        protected void gridArticulosSalida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = gridArticulosSalida.SelectedRow;
+            TextBox txtId = (TextBox)row.FindControl("txtEditId");
+        }
     }
 }
