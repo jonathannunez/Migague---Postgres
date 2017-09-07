@@ -11,7 +11,8 @@ namespace CapaEntidades
         public int id { get; set; }
         public DateTime fecha_desde { get; set; }
         public DateTime fecha_hasta { get; set; }
-        public string id_usuario { get; set; }
+        public int id_usuario { get; set; }
+        public Caja_Movimientos movimiento { get; set; }
 
         public Caja_Cierre() { }
 

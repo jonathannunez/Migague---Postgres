@@ -24,6 +24,8 @@ namespace CapaEntidades
         public int id_categoriaTributaria { get; set; }
         public int id_categoriaPrecios { get; set; }
 
+        public Cuenta_Corriente cta_cte { get; set; }
+
         public Cliente() { }
 
         public Cliente(int id, string razon_social, string nombre, string cuit, DateTime fecha_ingreso, string email,

@@ -10,26 +10,26 @@ using Npgsql;
 
 namespace CapaDatos
 {
-    public class CajaDAO
+    public class Cuenta_CorrienteDAO
     {
         // getInstance
-        #region "PATRON SINGLETON"
-        private static CajaDAO cajaDao = null;
-        private CajaDAO() { }
-        public static CajaDAO getInstance()
+        #region "PATRON Cuenta_CorrienteDAO"
+        private static Cuenta_CorrienteDAO cta_cteDao = null;
+        private Cuenta_CorrienteDAO() { }
+        public static Cuenta_CorrienteDAO getInstance()
         {
-            if (cajaDao == null)
+            if (cta_cteDao == null)
             {
-                cajaDao = new CajaDAO();
+                cta_cteDao = new Cuenta_CorrienteDAO();
             }
-            return cajaDao;
+            return cta_cteDao;
         }
         #endregion
 
         #region "ABMS"
-        public List<Caja_Movimientos> listaMovimientosCaja(string schema)
+        public List<Cuenta_Corriente> listaCtaCteCliente(Cliente cliente,string schema)
         {
-            List<Caja_Movimientos> listaMovimientos = new List<Caja_Movimientos>();
+            List<Cuenta_Corriente> listaCtaCte = new List<Cuenta_Corriente>();
             NpgsqlConnection conexion = null;
             NpgsqlCommand cmd = null;
             NpgsqlTransaction tran = null;
@@ -38,33 +38,69 @@ namespace CapaDatos
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spgetmovimientoscaja", conexion);
+                cmd = new NpgsqlCommand("logueo.spgetctactecliente", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_idcliente", cliente.id);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
                 conexion.Open();
                 tran = conexion.BeginTransaction();
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    Caja_Movimientos movimiento = new Caja_Movimientos();
-                    movimiento.id = Convert.ToInt32(dr["ID"].ToString());
-                    movimiento.fecha_movimiento = Convert.ToDateTime(dr["FECHA_MOVIMIENTO"].ToString());
-                    movimiento.monto = Convert.ToDouble(dr["MONTO"].ToString());
-                    movimiento.in_out = dr["IN_OUT"].ToString();
-                    listaMovimientos.Add(movimiento);
+                    Cuenta_Corriente cta_cte = new Cuenta_Corriente();
+                    cta_cte.id = Convert.ToInt32(dr["ID"].ToString());
+                    cta_cte.id_cliente = cliente.id;
+                    cta_cte.id_venta = Convert.ToInt32(dr["ID_VENTA"].ToString());
+                    cta_cte.saldo = Convert.ToDouble(dr["SALDO"].ToString());
+                    cta_cte.fecha_cancelacion = Convert.ToDateTime(dr["FECHA_CANCELACION"].ToString());
+                    cta_cte.id_caja = Convert.ToInt32(dr["ID_CAJA"].ToString());
+
+                    listaCtaCte.Add(cta_cte);
                 }
                 
                 dr.Close();
             }
             catch (Exception e)
             {
-                listaMovimientos = null;
+                listaCtaCte = null;
                 tran.Rollback();
                 conexion.Close();
             }
             tran.Commit();
             conexion.Close();
-            return listaMovimientos;
+            return listaCtaCte;
+        }
+
+        public bool modificarCtaCte(Cliente cliente, string schema)
+        {
+            NpgsqlTransaction tran = null;
+            NpgsqlConnection conexion = null;
+            NpgsqlCommand cmd = null;
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                cmd = new NpgsqlCommand("logueo.spmodificarctacte", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_idctacte", cliente.cta_cte.id);
+                cmd.Parameters.AddWithValue("parm_idcliente", cliente.id);
+                cmd.Parameters.AddWithValue("parm_idventa", cliente.cta_cte.id_venta);
+                cmd.Parameters.AddWithValue("parm_saldo", cliente.cta_cte.saldo);
+                cmd.Parameters.AddWithValue("parm_fecha_cancelacion", cliente.cta_cte.fecha_cancelacion);
+                cmd.Parameters.AddWithValue("parm_idcaja", cliente.cta_cte.id_caja);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                tran.Rollback();
+                conexion.Close();
+                return false;
+            }
+            tran.Commit();
+            conexion.Close();
+            return true;
         }
 
         public bool nuevoMovimientoCaja(Caja_Movimientos movimiento, string schema)
