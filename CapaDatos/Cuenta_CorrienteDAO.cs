@@ -103,7 +103,7 @@ namespace CapaDatos
             return true;
         }
 
-        public bool nuevoMovimientoCaja(Caja_Movimientos movimiento, string schema)
+        public bool elimimnarCtaCte(Cliente cliente, string schema)
         {
             NpgsqlTransaction tran = null;
             NpgsqlConnection conexion = null;
@@ -111,11 +111,14 @@ namespace CapaDatos
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spnuevomovimientocaja", conexion);
+                cmd = new NpgsqlCommand("logueo.speliminarctacte", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_monto", movimiento.monto);
-                cmd.Parameters.AddWithValue("parm_fecha_movimiento", movimiento.fecha_movimiento);
-                cmd.Parameters.AddWithValue("parm_in_out", movimiento.in_out);
+                cmd.Parameters.AddWithValue("parm_idctacte", cliente.cta_cte.id);
+                cmd.Parameters.AddWithValue("parm_idcliente", cliente.id);
+                cmd.Parameters.AddWithValue("parm_idventa", cliente.cta_cte.id_venta);
+                cmd.Parameters.AddWithValue("parm_saldo", cliente.cta_cte.saldo);
+                cmd.Parameters.AddWithValue("parm_fecha_cancelacion", cliente.cta_cte.fecha_cancelacion);
+                cmd.Parameters.AddWithValue("parm_idcaja", cliente.cta_cte.id_caja);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
                 conexion.Open();
                 tran = conexion.BeginTransaction();
@@ -130,111 +133,6 @@ namespace CapaDatos
             tran.Commit();
             conexion.Close();
             return true;
-        }
-
-        public bool nuevoMovimientoCaja(Caja_Movimientos movimiento, string schema, NpgsqlConnection conexion)
-        {
-            NpgsqlCommand cmd = null;
-            try
-            {
-                conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spnuevomovimientocaja", conexion);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_monto", movimiento.monto);
-                cmd.Parameters.AddWithValue("parm_fecha_movimiento", movimiento.fecha_movimiento);
-                cmd.Parameters.AddWithValue("parm_in_out", movimiento.in_out);
-                cmd.Parameters.AddWithValue("parm_schema", schema);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool cerrarCaja(Caja_Cierre cierre_caja,string schema)
-        {
-            NpgsqlTransaction tran = null;
-            NpgsqlConnection conexion = null;
-            NpgsqlCommand cmd = null;
-            try
-            {
-                conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spcierrecaja", conexion);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_fecha_desde", cierre_caja.fecha_desde);
-                cmd.Parameters.AddWithValue("parm_fecha_hasta", cierre_caja.fecha_hasta);
-                cmd.Parameters.AddWithValue("parm_idusuario", cierre_caja.id_usuario);
-                cmd.Parameters.AddWithValue("parm_schema", schema);
-                conexion.Open();
-                tran = conexion.BeginTransaction();
-                if(nuevoMovimientoCaja(cierre_caja.movimiento, schema, conexion))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                tran.Rollback();
-                conexion.Close();
-                return false;
-            }
-            tran.Commit();
-            conexion.Close();
-            return true;
-        }
-
-        public List<Caja_Cierre> listaCierreCaja(string schema)
-        {
-            List<Caja_Cierre> listaCierre = new List<Caja_Cierre>();
-            NpgsqlConnection conexion = null;
-            NpgsqlCommand cmd = null;
-            NpgsqlTransaction tran = null;
-            NpgsqlDataReader dr = null;
-
-            try
-            {
-                conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spgetcierrecaja", conexion);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_schema", schema);
-                conexion.Open();
-                tran = conexion.BeginTransaction();
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    Caja_Movimientos movimiento = new Caja_Movimientos();
-                    movimiento.id = Convert.ToInt32(dr["ID_MOVIMIENTO"].ToString());
-                    movimiento.fecha_movimiento = Convert.ToDateTime(dr["FECHA_MOVIMIENTO"].ToString());
-                    movimiento.monto = Convert.ToDouble(dr["MONTO"].ToString());
-                    movimiento.in_out = dr["IN_OUT"].ToString();
-
-                    Caja_Cierre cierre_caja = new Caja_Cierre();
-                    cierre_caja.id = Convert.ToInt32(dr["ID_CIERRE"].ToString());
-                    cierre_caja.fecha_desde = Convert.ToDateTime(dr["FECHA_DESDE"].ToString());
-                    cierre_caja.fecha_hasta = Convert.ToDateTime(dr["FECHA_HASTA"].ToString());
-                    cierre_caja.id_usuario = Convert.ToInt32(dr["ID_USUARIO"].ToString());
-                    cierre_caja.movimiento = movimiento;
-                    
-                    listaCierre.Add(cierre_caja);
-                }
-
-                dr.Close();
-            }
-            catch (Exception e)
-            {
-                listaCierre = null;
-                tran.Rollback();
-                conexion.Close();
-            }
-            tran.Commit();
-            conexion.Close();
-            return listaCierre;
         }
 
         #endregion
