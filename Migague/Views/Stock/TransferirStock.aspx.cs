@@ -56,7 +56,9 @@ namespace Migague.Views.ABM
         protected void gridArticulosSalida_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = gridArticulosSalida.SelectedRow;
+            int prueba = row.RowIndex;
             TextBox txtId = (TextBox)row.FindControl("txtEditId");
+
         }
     }
 }

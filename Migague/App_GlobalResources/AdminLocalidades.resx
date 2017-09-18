@@ -144,6 +144,12 @@
   <data name="lblNuevaLocalidadNombre" xml:space="preserve">
     <value>Nombre localidad</value>
   </data>
+  <data name="lblPais" xml:space="preserve">
+    <value>Pais</value>
+  </data>
+  <data name="lblProvincia" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
   <data name="phNuevaLocalidad" xml:space="preserve">
     <value>Ingrese nombre de la localidad</value>
   </data>

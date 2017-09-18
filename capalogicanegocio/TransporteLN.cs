@@ -53,11 +53,11 @@ namespace CapaLogicaNegocio
             }
         }
 
-        public string nuevoTransporte(string nombre, DateTime fecha, string schema)
+        public string nuevoTransporte(Transporte transporte, string schema)
         {
             try
             {
-                return TransporteDAO.getInstance().nuevoTransporte(nombre, fecha, schema);
+                return TransporteDAO.getInstance().nuevoTransporte(transporte, schema);
             }
             catch (Exception e)
             {

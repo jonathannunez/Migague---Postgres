@@ -1,4 +1,5 @@
-﻿using CapaLogicaNegocio;
+﻿using CapaEntidades;
+using CapaLogicaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,10 @@ namespace Migague.Views.ABM
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.UtcNow.Date;
-            string retorno = TransporteLN.getInstance().nuevoTransporte(txtNombre.Text.Trim(), dateTime,
-                Session["schema"].ToString());
+            Transporte transporte = new Transporte();
+            transporte.nombre = txtNombre.Text.Trim();
+            transporte.fecha = dateTime;
+            string retorno = TransporteLN.getInstance().nuevoTransporte(transporte, Session["schema"].ToString());
             txtNombre.Text = "";
             Response.Write(@"<script language='javascript'>alert('" + retorno + " .');</script>");
         }

@@ -105,11 +105,11 @@ namespace CapaDatos
             return listaTransportes;
         }
 
-        public string nuevoTransporte(string nombre, DateTime fecha, string schema)
+        public string nuevoTransporte(Transporte transporte, string schema)
         {
             string retorno = null;
             List<Transporte> listTransportes = listaTransportes(schema);
-            bool existe = validarObjetoExistente(listTransportes, nombre);
+            bool existe = validarObjetoExistente(listTransportes, transporte.nombre);
             if (existe)
             {
                 retorno = "El transporte ya existe";
@@ -120,10 +120,10 @@ namespace CapaDatos
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spnuevotransportecliente", conexion);
+                cmd = new NpgsqlCommand("logueo.spnuevotransporte", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("parm_nombre", nombre);
-                cmd.Parameters.AddWithValue("parm_fecha", fecha);
+                cmd.Parameters.AddWithValue("parm_nombre", transporte.nombre);
+                cmd.Parameters.AddWithValue("parm_fecha", transporte.fecha);
                 cmd.Parameters.AddWithValue("parm_schema", schema);
                 conexion.Open();
                 cmd.ExecuteNonQuery();

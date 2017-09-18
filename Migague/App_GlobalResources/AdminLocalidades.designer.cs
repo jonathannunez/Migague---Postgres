@@ -142,6 +142,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Pais.
+        /// </summary>
+        internal static string lblPais {
+            get {
+                return ResourceManager.GetString("lblPais", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Provincia.
+        /// </summary>
+        internal static string lblProvincia {
+            get {
+                return ResourceManager.GetString("lblProvincia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ingrese nombre de la localidad.
         /// </summary>
         internal static string phNuevaLocalidad {

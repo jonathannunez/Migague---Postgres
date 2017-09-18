@@ -29,7 +29,7 @@ namespace Migague.Views.ABM
         protected void btnAddUser_Click(object sender, EventArgs e)
         {
             string retorno = UsuarioLN.getInstance().nuevoUsuario(txtNombreUser.Text.Trim(),
-            txtPasswordUser.Text.Trim(), ddlRoles.SelectedValue.ToString().Trim(), Session["schema"].ToString());
+            txtPasswordUser.Text.Trim(), ddlRoles.SelectedItem.Text.ToString().Trim(), Session["schema"].ToString());
             txtNombreUser.Text = "";
             txtPasswordUser.Text = "";
             Response.Write(@"<script language='javascript'>alert('" + retorno + " .');</script>");

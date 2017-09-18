@@ -13,6 +13,15 @@ namespace Migague.Views.ABM {
     public partial class AdministrarLocalidades {
         
         /// <summary>
+        /// Control lblPais.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPais;
+        
+        /// <summary>
         /// Control ddlPaises.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace Migague.Views.ABM {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPaises;
+        
+        /// <summary>
+        /// Control lblProvincia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProvincia;
         
         /// <summary>
         /// Control ddlProvincias.

@@ -303,6 +303,44 @@ namespace CapaDatos
 
         #endregion
 
+        public CategoriaPrecios getCategoriaCliente(Cliente cliente,string schema)
+        {
+            CategoriaPrecios categoria = new CategoriaPrecios();
+            NpgsqlConnection conexion = null;
+            NpgsqlCommand cmd = null;
+            NpgsqlTransaction tran = null;
+            NpgsqlDataReader dr = null;
+
+            try
+            {
+                conexion = Conexion.getInstance().ConexionDB();
+                cmd = new NpgsqlCommand("logueo.spgetcategoriacliente", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                cmd.Parameters.AddWithValue("parm_idcliente", cliente.id);
+                conexion.Open();
+                tran = conexion.BeginTransaction();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    categoria.id = Convert.ToInt32(dr["ID"].ToString());
+                    categoria.nombre = dr["DESCRIPCION"].ToString();
+                    categoria.es_activo = Convert.ToBoolean(dr["ESACTIVO"].ToString());
+                }
+                dr.Close();
+            }
+            catch (Exception e)
+            {
+                categoria = null;
+                tran.Rollback();
+                conexion.Close();
+                return categoria;
+            }
+            tran.Commit();
+            conexion.Close();
+            return categoria;
+        }
+
         public bool validarObjetoExistente(List<Cliente> lista, string nombre, string cuit)
         {
             bool existe = false;

@@ -14,15 +14,15 @@ namespace CapaDatos
     {
         // getInstance
         #region "PATRON SINGLETON"
-        private static StockDAO daoAdmin = null;
+        private static StockDAO stockDao = null;
         private StockDAO() { }
         public static StockDAO getInstance()
         {
-            if (daoAdmin == null)
+            if (stockDao == null)
             {
-                daoAdmin = new StockDAO();
+                stockDao = new StockDAO();
             }
-            return daoAdmin;
+            return stockDao;
         }
         #endregion
 
@@ -54,7 +54,7 @@ namespace CapaDatos
             try
             {
                 conexion = Conexion.getInstance().ConexionDB();
-                cmd = new NpgsqlCommand("logueo.spgetstock", conexion);
+                cmd = new NpgsqlCommand("logueo.spgetstock2", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("parm_idsucursal", sucursal);
                 cmd.Parameters.AddWithValue("parm_schema", schema);

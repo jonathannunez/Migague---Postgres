@@ -135,18 +135,18 @@ namespace Resources {
         /// <summary>
         ///   Busca una cadena traducida similar a Nombre provincia.
         /// </summary>
-        internal static string lblNuevoProvinciaNombre {
+        internal static string lblNuevaProvinciaNombre {
             get {
-                return ResourceManager.GetString("lblNuevoProvinciaNombre", resourceCulture);
+                return ResourceManager.GetString("lblNuevaProvinciaNombre", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Ingrese nombre de la provincia.
         /// </summary>
-        internal static string phNuevoProvincia {
+        internal static string phNuevaProvincia {
             get {
-                return ResourceManager.GetString("phNuevoProvincia", resourceCulture);
+                return ResourceManager.GetString("phNuevaProvincia", resourceCulture);
             }
         }
     }

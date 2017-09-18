@@ -141,10 +141,10 @@
   <data name="gridProvinciasNombre" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="lblNuevoProvinciaNombre" xml:space="preserve">
+  <data name="lblNuevaProvinciaNombre" xml:space="preserve">
     <value>Province name</value>
   </data>
-  <data name="phNuevoProvincia" xml:space="preserve">
+  <data name="phNuevaProvincia" xml:space="preserve">
     <value>Enter province name</value>
   </data>
 </root>

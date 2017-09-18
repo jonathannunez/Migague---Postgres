@@ -5,8 +5,10 @@
     </h2>
 
     <div class="form-group" style="text-align: left">
+        <asp:Label ID="lblPais" runat="server" Text="<%$ Resources:AdminLocalidades, lblPais%>"></asp:Label>
         <asp:DropDownList ID="ddlPaises" runat="server" OnSelectedIndexChanged="ddlPaises_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         <br />
+        <asp:Label ID="lblProvincia" runat="server" Text="<%$ Resources:AdminLocalidades, lblProvincia%>"></asp:Label>
         <asp:DropDownList ID="ddlProvincias" runat="server" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         <br />
         <br />
