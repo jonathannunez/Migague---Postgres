@@ -138,6 +138,7 @@ namespace CapaDatos
                     talle.nombre = dr["TALLE"].ToString();
 
                     Articulo articulo = new Articulo();
+                    articulo.id = Convert.ToInt32(dr["IDARTICULO"].ToString());
                     articulo.modelo = modelo;
                     articulo.color = color;
                     articulo.talle = talle;
@@ -183,6 +184,29 @@ namespace CapaDatos
             }
             tran.Commit();
             conexion.Close();
+            return retorno;
+        }
+
+        public bool checkStockDisponible(Stockcs stock, Sucursal sucursal, string schema, NpgsqlConnection conexion)
+        {
+            bool retorno = false;
+            NpgsqlCommand cmd = null;
+
+            try
+            {
+                cmd = new NpgsqlCommand("logueo.spcheckstockdisponible", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("parm_idsucursal", sucursal.id);
+                cmd.Parameters.AddWithValue("parm_idarticulo", stock.articulo.id);
+                cmd.Parameters.AddWithValue("parm_cantidad", stock.cantidad);
+                cmd.Parameters.AddWithValue("parm_schema", schema);
+                Object retornoSQL = cmd.ExecuteScalar();
+                retorno = Convert.ToBoolean(retornoSQL);
+            }
+            catch (Exception e)
+            {
+                return retorno;
+            }
             return retorno;
         }
 
@@ -249,7 +273,7 @@ namespace CapaDatos
         public bool decrementarStock(Stockcs stock, Sucursal sucursal, string schema, NpgsqlConnection conexion)
         {
             bool retorno = false;
-            bool hayStock = checkStockDisponible(stock, sucursal, schema);
+            bool hayStock = checkStockDisponible(stock, sucursal, schema, conexion);
             if (hayStock)
             {
                 // si hay stock disponible lo reservo

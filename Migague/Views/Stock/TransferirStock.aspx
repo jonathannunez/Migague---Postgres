@@ -6,10 +6,10 @@
     <asp:DropDownList ID="ddlSucursalSalida" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSucursalSalida_SelectedIndexChanged"></asp:DropDownList><br />
 
     <asp:GridView ID="gridArticulosSalida" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True"
-        OnSelectedIndexChanged="gridArticulosSalida_SelectedIndexChanged">
+        OnRowDataBound="gridArticulosSalida_DataBound" OnSelectedIndexChanged="gridArticulosSalida_SelectedIndexChanged">
             <Columns>
 
-                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaID%>" Visible="false">
+                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaID%>">
                     <ItemTemplate>
                         <asp:TextBox runat="server" ID="txtIDArticuloSalida" Text='<%# Eval("articulo.id")%>'/>
                     </ItemTemplate>
@@ -18,7 +18,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaNombre%>" Visible="false">
+                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaNombre%>">
                     <ItemTemplate>
                         <asp:TextBox runat="server" ID="txtArticuloID" Text='<%# Eval("articulo.modelo.id")%>' />
                     </ItemTemplate>
@@ -36,7 +36,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaNombre%>" Visible="false">
+                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaNombre%>">
                     <ItemTemplate>
                         <asp:TextBox runat="server" ID="txtColorID" Text='<%# Eval("articulo.color.id")%>'/>
                     </ItemTemplate>
@@ -54,7 +54,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaNombre%>" Visible="false">
+                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaNombre%>">
                     <ItemTemplate>
                         <asp:TextBox runat="server" ID="txtTalleID" Text='<%# Eval("articulo.talle.id")%>'/>
                     </ItemTemplate>
@@ -72,7 +72,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaCantidad%>" Visible="true">
+                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaCantidad%>">
                     <ItemTemplate>
                         <asp:TextBox runat="server" ID="txtCantidadArticuloSalida" Text='<%# Eval("cantidad_neta")%>' Visible="true"/>
                     </ItemTemplate>
@@ -81,7 +81,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaCantidad%>" Visible="true">
+                <asp:TemplateField HeaderText="<%$ Resources:Stock, gridArticulosSalidaCantidad%>">
                     <ItemTemplate>
                         <asp:TextBox runat="server" ID="txtCantidadIngresada" Visible="true"/>
                     </ItemTemplate>
@@ -93,6 +93,13 @@
                 <asp:CommandField ButtonType="Link" ShowCancelButton="true" AccessibleHeaderText="Seleccionar" ShowSelectButton="True" />
             </Columns>
         </asp:GridView>
-
-   
+    
+    <br /> 
+    <asp:Label ID="lblSucursalEntrada" runat="server" Text="<%$ Resources:Stock, lblSucursalSalida%>"></asp:Label>
+    <asp:DropDownList ID="ddlSucursalEntrada" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSucursalEntrada_SelectedIndexChanged"></asp:DropDownList><br />
+    <br />
+    <asp:Label ID="cantidadIngresada" runat="server" Text="Cantidad"></asp:Label>
+    <asp:TextBox ID="txtCantIngresada" runat="server"></asp:TextBox>
+    <br />
+    <asp:Button ID="btnTransferir" runat="server" Text="transferir" OnClick="btnTransferir_Click"/>
 </asp:Content>

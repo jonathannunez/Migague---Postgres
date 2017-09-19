@@ -21,7 +21,12 @@ namespace CapaEntidades
         public int id_talle { get; set; }
         public int id_color { get; set; } 
 
-        public Articulo() { }
+        public Articulo()
+        {
+            modelo = new Modelo();
+            color = new Color();
+            talle = new Talle();
+        }
 
         public Articulo(int id, Modelo modelo, Talle talle, Color color, int id_modelo, int id_talle, int id_color, 
             int precio_may, int precio_min, string cod_barra, bool es_activo)
